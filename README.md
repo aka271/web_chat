@@ -42,7 +42,7 @@ mvn compile
 ```
 3. Run the main application class to start the server:
 ```bash
-mvn exec:java -Dexec.mainClass="com.yourusername.chatapp.App"
+mvn exec:java -Dexec.mainClass="com.web_chat.App"
 ```
 
 4. If successful, you will see a message in the console indicating that the server has started (e.g., Server has started on port 7070!). The backend is now running and ready to accept connections.
