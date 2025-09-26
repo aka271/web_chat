@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <h1>Hello, World!</h1>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Chat - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- This view is now the only content of index.html -->
+        <div id="auth-view" class="view active-view">
+            <div class="form-container">
+                <h2 id="form-title">Login</h2>
+                <form id="auth-form" onsubmit="return false;">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required autocomplete="username">
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
+                    </div>
+                    <p id="error-message" class="error-message"></p>
+                    <div class="button-group">
+                        <button type="button" id="login-btn">Login</button>
+                        <button type="button" id="register-btn">Register</button>
+                    </div>
+                </form>
+                <a href="#" id="switch-form-link">Need to register?</a>
+            </div>
+        </div>
+    </div>
+    <!-- This page now uses script.js -->
+    <script src="script.js"></script>
+</body>
 </html>
+

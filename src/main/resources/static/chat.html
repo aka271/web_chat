@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Chat</title>
+    <!-- We use the same stylesheet as the login page -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container" class="chat-container">
+
+        <!-- This is the main chat view, which is always active on this page -->
+        <div id="chat-view" class="view active-view">
+            
+            <!-- Left Panel: User List -->
+            <aside id="user-sidebar">
+                <div class="sidebar-header">
+                    <h3>Online Users</h3>
+                </div>
+                <div id="user-list">
+                    <!-- User list items will be dynamically inserted here by JavaScript -->
+                </div>
+                <div class="sidebar-footer">
+                    <button id="logout-btn">Logout</button>
+                </div>
+            </aside>
+
+            <!-- Right Panel: Chat Window -->
+            <main id="chat-main">
+                <div id="chat-welcome-message" class="chat-area active-chat-area">
+                    <h2>Welcome!</h2>
+                    <p>Select a user from the list to start a conversation.</p>
+                </div>
+
+                <div id="chat-window" class="chat-area">
+                    <div class="chat-header">
+                        <h3 id="chat-with-username"></h3>
+                    </div>
+                    <div id="message-list">
+                        <!-- Messages will be dynamically inserted here -->
+                    </div>
+                    <div class="message-input-area">
+                        <form id="message-form" onsubmit="return false;">
+                            <input type="text" id="message-input" placeholder="Type your message..." autocomplete="off">
+                            <button type="submit" id="send-btn">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- This page now uses chat.js -->
+    <script src="chat.js"></script>
+</body>
+</html>
+
