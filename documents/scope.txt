@@ -1,0 +1,114 @@
+Project Plan: Direct User-to-User Chat Application
+This document outlines the development plan for building a real-time, direct user-to-user chat application.
+
+1. Project Overview
+The goal is to create a web application where users can register, log in, see a list of other online users, and engage in private, real-time conversations with them.
+
+2. Core Technologies
+Backend: Java
+
+Web Framework: A lightweight framework like Javalin or SparkJava to handle API requests (for login/registration).
+
+WebSocket Library: A Java library for managing real-time WebSocket connections (e.g., the one built into Javalin or a standalone one like Java-WebSocket).
+
+Frontend:
+
+HTML: To structure the application's layout.
+
+CSS: For styling and presentation.
+
+JavaScript: To handle user interactions, API calls, and WebSocket communication.
+
+3. High-Level Architecture
+The application will follow a client-server model:
+
+Java Backend: A single server application that will:
+
+Expose a standard REST API for user management (registration, login, getting user lists).
+
+Provide a WebSocket endpoint for real-time messaging.
+
+Manage user sessions and message routing internally.
+
+Web Frontend: A single-page application (SPA) running in the user's browser that communicates with the backend via the API and WebSocket connection.
+
+4. Development Phases
+We will build the application in logical, sequential phases.
+
+Phase 1: Backend Foundation & User Management
+The first step is to build the non-real-time part of the backend.
+
+Tasks:
+
+Project Setup: Initialize a new Java project using Maven or Gradle. Add dependencies for the web framework and WebSocket library.
+
+User Data Model: Define a simple User class (with userId, username, password). For now, we can store users in an in-memory list or map on the server.
+
+Create API Endpoints:
+
+POST /api/register: Accepts a username and password, creates a new user, and stores them.
+
+POST /api/login: Accepts a username and password, validates them against the stored users, and returns a success response (we'll add tokens later).
+
+GET /api/users: Returns a list of all registered users.
+
+Phase 2: Frontend Scaffolding & User Authentication
+With the backend API in place, we can build the user-facing login and registration screens.
+
+Tasks:
+
+HTML Structure: Create the main index.html file with three distinct sections: a registration page, a login page, and the main chat interface (which will be hidden initially).
+
+JavaScript Logic:
+
+Write JS to handle the submission of the registration and login forms.
+
+On form submission, use the fetch API to send the data to the backend endpoints created in Phase 1.
+
+Based on the server's response, either show an error message or hide the login/registration forms and show the main chat interface.
+
+Phase 3: Integrating WebSockets for Real-Time Connection
+This is where we introduce the real-time component.
+
+Tasks:
+
+Backend WebSocket Endpoint:
+
+Create a WebSocket endpoint (e.g., /chat).
+
+Implement logic to handle new client connections.
+
+Create a server-side Session Manager: This is a crucial component, likely a Map, that links a userId to their active WebSocket connection object. This allows us to find and send messages to specific users.
+
+When a user connects, we need a way to identify them. A simple first step is for the client to send their username as the first WebSocket message after connecting.
+
+Frontend WebSocket Connection:
+
+After a user successfully logs in (from Phase 2), the JavaScript should establish a connection to the backend's /chat WebSocket endpoint.
+
+Once connected, it should send the user's username to the server to register the session.
+
+Phase 4: Building the Chat Interface & Message Routing
+Now we connect all the pieces to enable private messaging.
+
+Tasks:
+
+Backend Message Routing:
+
+Define a standard message format (JSON is ideal), e.g., { "recipientId": "user-to-send-to", "messageText": "Hello!" }.
+
+When the server receives a message, it will parse this JSON.
+
+It will use the recipientId to look up the recipient's WebSocket connection in the Session Manager map.
+
+It then sends the message only to that specific user's connection.
+
+Frontend UI:
+
+User List: Fetch the list of all users from /api/users and display it. We can later enhance this to show online status.
+
+Chat Windows: When a user clicks on a name in the user list, create and display a chat window for that conversation.
+
+Sending Messages: The "send" button in a chat window will package the message text and recipient's ID into the JSON format and send it over the WebSocket.
+
+Receiving Messages: The JavaScript's WebSocket onmessage listener will handle incoming messages from the server, find the correct chat window (based on who the message is from), and append the message.
