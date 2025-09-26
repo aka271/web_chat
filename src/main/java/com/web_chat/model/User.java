@@ -1,10 +1,16 @@
+package com.web_chat.model;
+
+import java.util.Objects;
+import java.util.UUID;
+
 public class User {
-    private static final long serialVersionUID = 1L;
+    private String userId;
     private String username;
     private String password;
     private String email;
 
     public User(String username, String password, String email) {
+        this.userId = UUID.randomUUID().toString();
         this.username = username;
         this.password = password;
         this.email = email;
